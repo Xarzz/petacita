@@ -5,18 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MBTIResult extends Model
+class Saved extends Model
 {
     use HasFactory;
 
-    protected $table = 'mbti_results';
     protected $fillable = [
         'user_id',
-        'mbti_type',
-        'mbti_title',
-        'description',
-        'taken_at',
+        'item_type',
+        'item_id',
     ];
+
+    public function job()
+    {
+        return $this->belongsTo(Job::class);
+    }
 
     public function user()
     {

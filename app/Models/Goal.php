@@ -11,14 +11,15 @@ class Goal extends Model
 
     protected $fillable = [
         'user_id',
-        'goal_category',
-        'goal_title',
+        'category',
+        'title',
         'description',
-        'deadline',
         'status',
+        'progress',
+        'start_date',
+        'due_date',
     ];
 
-    // relasi ke user
     public function user()
     {
         return $this->belongsTo(User::class);

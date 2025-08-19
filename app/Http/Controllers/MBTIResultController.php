@@ -2,50 +2,118 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MBTIResult;
+use App\Models\MbtiResult;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MBTIResultController extends Controller
 {
+    public function showForm()
+    {
+        return view('mbti.form');
+    }
+
     public function store(Request $request)
+{
+    $request->validate([
+        'mbti_type' => 'required|string',
+        'description' => 'nullable|string',
+        'date_taken' => 'nullable|date',
+    ]);
+
+    $user = Auth::user();
+
+    $titles = [
+        'INTJ' => 'The Architect',
+        'INTP' => 'The Thinker',
+        'ENTJ' => 'The Commander',
+        'ENTP' => 'The Debater',
+        'INFJ' => 'The Advocate',
+        'INFP' => 'The Mediator',
+        'ENFJ' => 'The Protagonist',
+        'ENFP' => 'The Campaigner',
+        'ISTJ' => 'The Logistician',
+        'ISFJ' => 'The Protector',
+        'ESTJ' => 'The Executive',
+        'ESFJ' => 'The Consul',
+        'ISTP' => 'The Virtuoso',
+        'ISFP' => 'The Adventurer',
+        'ESTP' => 'The Entrepreneur',
+        'ESFP' => 'The Entertainer',
+    ];
+
+    $mbtiType = strtoupper($request->mbti_type);
+    $mbtiTitle = $titles[$mbtiType] ?? null;
+
+    // Simpan data
+    MbtiResult::create([
+        'user_id' => $user->id,
+        'mbti_type' => $mbtiType,
+        'mbti_title' => $mbtiTitle,
+        'description' => $request->description,
+        'taken_at' => $request->date_taken ?? now(),
+    ]);
+
+    return redirect()->route('dashboard')->with('success', 'MBTI information saved successfully!');
+}
+
+    
+    public function edit()
     {
-        $validated = $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'mbti_type' => 'required|string',
-            'description' => 'nullable|string',
-            'taken_at' => 'nullable|date',
-        ]);
+    $user = Auth::user();
+    $result = $user->mbtiResult; // Pastikan relasi sudah dibuat di model User
 
-        $result = MBTIResult::create($validated);
-
-        return response()->json($result, 201);
+     return view('mbti.edit', [
+        'user' => $user,
+        'result' => $result,
+        'mbtiResult' => $result, // jika sidebar pakai nama ini
+    ]);
     }
 
-    public function show($id)
-    {
-        return MBTIResult::with('user')->findOrFail($id);
-    }
+    public function update(Request $request)
+{
+    $request->validate([
+        'mbti_type' => 'required|string',
+        'description' => 'nullable|string',
+        'date_taken' => 'nullable|date',
+    ]);
 
-    public function update(Request $request, $id)
-    {
-        $result = MBTIResult::findOrFail($id);
+    $user = Auth::user();
 
-        $validated = $request->validate([
-            'mbti_type' => 'sometimes|string',
-            'description' => 'nullable|string',
-            'taken_at' => 'nullable|date',
-        ]);
+    // Mapping MBTI type ke title
+    $titles = [
+        'INTJ' => 'The Architect',
+        'INTP' => 'The Thinker',
+        'ENTJ' => 'The Commander',
+        'ENTP' => 'The Debater',
+        'INFJ' => 'The Advocate',
+        'INFP' => 'The Mediator',
+        'ENFJ' => 'The Protagonist',
+        'ENFP' => 'The Campaigner',
+        'ISTJ' => 'The Logistician',
+        'ISFJ' => 'The Protector',
+        'ESTJ' => 'The Executive',
+        'ESFJ' => 'The Consul',
+        'ISTP' => 'The Virtuoso',
+        'ISFP' => 'The Adventurer',
+        'ESTP' => 'The Entrepreneur',
+        'ESFP' => 'The Entertainer',
+    ];
 
-        $result->update($validated);
+    $mbtiType = strtoupper($request->mbti_type);
+    $mbtiTitle = $titles[$mbtiType] ?? null;
 
-        return response()->json($result);
-    }
+    // Simpan hasil MBTI
+    $result = MbtiResult::updateOrCreate(
+        ['user_id' => $user->id],
+        [
+            'mbti_type' => $mbtiType,
+            'mbti_title' => $mbtiTitle,
+            'description' => $request->description,
+            'taken_at' => $request->date_taken ?? now(),
+        ]
+    );
 
-    public function destroy($id)
-    {
-        $result = MBTIResult::findOrFail($id);
-        $result->delete();
-
-        return response()->json(['message' => 'Deleted']);
-    }
+    return redirect()->route('dashboard')->with('success', 'MBTI information saved successfully!');
+}
 }

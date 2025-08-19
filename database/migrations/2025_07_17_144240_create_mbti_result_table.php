@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('user_id'); // relasi ke users
             $table->string('mbti_type'); // contoh: INFP, ESTJ
+            $table->string('mbti_title')->nullable(); // judul tipe MBTI, misalnya "The Mediator"
             $table->text('description')->nullable(); // penjelasan tentang tipe ini
             $table->timestamp('taken_at')->nullable(); // kapan tes dilakukan
             $table->timestamps();
