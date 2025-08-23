@@ -4,13 +4,13 @@
 <div id="mainContent" class="content-transition lg:ml-64 pt-16 bg-primary min-h-screen">
     <div class="section-content p-6 fade-in max-w-7xl mx-auto">
 
-        {{-- HEADER --}}
+         {{-- HEADER --}}
         <div class="mb-8 flex items-center justify-between">
             <div>
                 <h2 class="text-3xl font-bold text-primary">Higher Education</h2>
                 <p class="text-secondary mt-2">Find your best decision based on your interests</p>
             </div>
-               <div class="flex items-center gap-4">
+               <div class="flexitems-center gap-4">
                 <a href="{{ route('saved.index') }}">
                 <img src="{{ asset('img/owl.png') }}" alt="Saved Jobs" 
                     class="w-9 h-9 object-cover rounded-full cursor-pointer" 
@@ -21,39 +21,13 @@
                     title="User Profile">
             </div>
         </div>
+        
 
         {{-- TABS --}}
         <div class="flex gap-4 mb-6 border-b">
             <button onclick="showTab('universities')" id="tab-universities" class="tab-btn active">Universities</button>
             <button onclick="showTab('trainings')" id="tab-trainings" class="tab-btn">Pelatihan Kerja</button>
             <button onclick="showTab('dinas')" id="tab-dinas" class="tab-btn">Sekolah Kedinasan</button>
-        </div>
-
-        {{-- SEARCH & FILTER --}}
-        <div class="flex flex-wrap gap-4 mb-6">
-            <input type="text" placeholder="Search universities, programs, or locations..."
-                   class="flex-1 min-w-[250px] border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            <select class="border border-gray-300 rounded-lg px-4 py-2">
-                <option>All Regions</option>
-                <option>Jakarta</option>
-                <option>Bandung</option>
-                <option>Yogyakarta</option>
-                <option>Surabaya</option>
-            </select>
-            <select class="border border-gray-300 rounded-lg px-4 py-2">
-                <option>All Types</option>
-                <option>Public University</option>
-                <option>Private University</option>
-                <option>Institute</option>
-                <option>Polytechnic</option>
-            </select>
-            <select class="border border-gray-300 rounded-lg px-4 py-2">
-                <option>All Fields</option>
-                <option>Technology</option>
-                <option>Business</option>
-                <option>Engineering</option>
-                <option>Science</option>
-            </select>
         </div>
 
            {{-- UNIVERSITIES GRID --}}
@@ -266,7 +240,7 @@
     </div>
      {{-- CTA Lihat Semua --}}
     <div class="mt-6 text-center">
-        <a href="{{ route('higher.universities') }}"
+        <a href="{{ route('higher.dinas') }}"
            class="inline-block text-sm bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg shadow-md transition">
             Lihat Semua Sekolah Kedinasan
         </a>

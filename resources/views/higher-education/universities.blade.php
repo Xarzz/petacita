@@ -5,12 +5,61 @@
     <div class="section-content p-6 fade-in max-w-7xl mx-auto">
 
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold">Semua Universitas</h1>
+        <div>
+            <h1 class="text-3xl font-bold text-primary">Semua Universitas</h1>
+            <p class="text-secondary mt-2">You can find out all of the university</p>
+        </div>
+        <div class="flexitems-center gap-4">
             <a href="{{ route('higher-education.index') }}"
                class="text-sm bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">
                ⬅ Kembali ke Rekomendasi
             </a>
         </div>
+        </div>
+
+        <div class="flex gap-4 mb-6 border-b">
+        </div>
+
+        {{-- SEARCH AND FILTER FORM --}}
+        <form method="GET" action="{{ route('higher.universities') }}" class="flex flex-wrap gap-4 mb-6">
+    <input type="text" name="search" value="{{ request('search') }}" 
+    placeholder="Search universities, programs, or locations..."
+    class="flex-1 min-w-[250px] border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+
+    {{-- Filter Rating --}}
+    <select name="rating" class="border border-gray-300 rounded-lg px-4 py-2">
+         <option value="">Semua Rating</option>
+         <option value="4.0" {{ request('rating') == '4.0' ? 'selected' : '' }}>4.0+</option>
+         <option value="4.3" {{ request('rating') == '4.3' ? 'selected' : '' }}>4.3 - 4.5</option>
+         <option value="4.5" {{ request('rating') == '4.5' ? 'selected' : '' }}>4.5+</option>
+    </select>
+    
+
+        {{-- Filter Lokasi --}}
+    <select name="location" class="border border-gray-300 rounded-lg px-4 py-2">
+         <option value="">Semua Lokasi</option>
+         <option value="West Java" {{ request('location') == 'West Java' ? 'selected' : '' }}>West Java</option>
+         <option value="Central Java" {{ request('location') == 'Central Java' ? 'selected' : '' }}>Central Java</option>
+         <option value="East Java" {{ request('location') == 'East Java' ? 'selected' : '' }}>East Java</option>
+         <option value="Jakarta" {{ request('location') == 'Jakarta' ? 'selected' : '' }}>Jakarta</option>
+         <option value="DIY" {{ request('location') == 'DIY' ? 'selected' : '' }}>DIY</option>
+         <option value="Bali" {{ request('location') == 'Bali' ? 'selected' : '' }}>Bali</option>
+    </select>
+
+
+    {{-- Filter Tipe Kampus --}}
+    <select name="campus_type" class="border border-gray-300 rounded-lg px-4 py-2">
+        <option value="">-- Semua Tipe --</option>
+        <option value="universitas" {{ request('campus_type') == 'universitas' ? 'selected' : '' }}>Universitas</option>
+        <option value="institut" {{ request('campus_type') == 'institut' ? 'selected' : '' }}>Institut</option>
+        <option value="politeknik" {{ request('campus_type') == 'politeknik' ? 'selected' : '' }}>Politeknik</option>
+    </select>
+
+    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm">Filter</button>
+</form>
+
+
+
 
          {{-- UNIVERSITIES GRID --}}
 <div id="content-universities" class="tab-content">
