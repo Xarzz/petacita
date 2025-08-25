@@ -21,14 +21,15 @@
                     title="User Profile">
             </div>
         </div>
-        
-
+    
         {{-- TABS --}}
-        <div class="flex gap-4 mb-6 border-b">
-            <button onclick="showTab('universities')" id="tab-universities" class="tab-btn active">Universities</button>
+        <div class="card-shadow rounded-lg p-4 mb-8 bg-card transition">
+            <button onclick="showTab('universities')" id="tab-universities" class="tab-btn">Universities</button>
             <button onclick="showTab('trainings')" id="tab-trainings" class="tab-btn">Pelatihan Kerja</button>
             <button onclick="showTab('dinas')" id="tab-dinas" class="tab-btn">Sekolah Kedinasan</button>
         </div>
+
+        <div class="flex gap-4 mb-6 border-b"></div>
 
            {{-- UNIVERSITIES GRID --}}
 <div id="content-universities" class="tab-content hidden">

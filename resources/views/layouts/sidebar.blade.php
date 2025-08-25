@@ -73,7 +73,8 @@
                         <span>Higher Education</span>
                     </a>
                     
-                    <a href="#" onclick="showSection('entrepreneurship')" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg">
+                    <a href="{{ route('entrepreneuership.index') }}"
+                        class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ request()->routeIs('entrepreneuership.index') ? 'bg-blue-100 text-blue-700 font-semibold' : '' }}">
                         <i class="fas fa-lightbulb"></i>
                         <span>Entrepreneurship</span>
                     </a>

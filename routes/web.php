@@ -7,6 +7,7 @@ use App\Http\Controllers\GoalController;
 use App\Http\Controllers\HigherEducationController;
 use App\Http\Controllers\MBTIResultController;
 use App\Http\Controllers\MbtiRecommendationController;
+use App\Http\Controllers\EntrepreneuershipController;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\SavedController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,8 @@ Route::get('/higher-education/universities', [HigherEducationController::class, 
 Route::get('/higher-education/trainings', [HigherEducationController::class, 'trainings'])->name('higher.trainings');
 Route::get('/higher-education/dinas', [HigherEducationController::class, 'dinas'])->name('higher.dinas');
 
+
+Route::get('/entrepreneuership', [EntrepreneuershipController::class, 'index'])->name('entrepreneuership.index');
 
 
   Route::get('/mbti', [MBTIResultController::class, 'showForm'])->name('mbti.form');
